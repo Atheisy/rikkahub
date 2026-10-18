@@ -217,6 +217,9 @@ private fun SearchServiceOptionsEditor(
         is SearchServiceOptions.GrokOptions -> {
             GrokOptions(options) { onUpdateOptions(it) }
         }
+        is SearchServiceOptions.SuiXiangOptions -> {
+            SuiXiangOptions(options) { onUpdateOptions(it) }
+        }
         is SearchServiceOptions.TinyfishOptions -> {
             TinyfishOptions(options) { onUpdateOptions(it) }
         }
@@ -966,6 +969,26 @@ internal fun GrokOptions(
                 onUpdateOptions(options.copy(systemPrompt = it))
             },
             minLines = 3,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+internal fun SuiXiangOptions(
+    options: SearchServiceOptions.SuiXiangOptions,
+    onUpdateOptions: (SearchServiceOptions.SuiXiangOptions) -> Unit
+) {
+    FormItem(
+        label = {
+            Text(stringResource(R.string.search_detail_api_key))
+        }
+    ) {
+        OutlinedTextField(
+            value = options.apiKey,
+            onValueChange = {
+                onUpdateOptions(options.copy(apiKey = it))
+            },
             modifier = Modifier.fillMaxWidth()
         )
     }
